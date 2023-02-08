@@ -2,13 +2,13 @@
 #include <vector>
 
 #include "testing_sb64/decode_to_uchars.h"
-#include "sb64/constant/common.h"
+#include "sb64/detail/constant/common.h"
 
 BOOST_AUTO_TEST_SUITE(decode_b64);
 
 BOOST_AUTO_TEST_CASE(Decodes_whole_b64_word_with_no_padds)
 {
-    const unsigned char padd{sb64::constant::padd_char};
+    const unsigned char padd{sb64::detail::constant::padd_char};
 
     const std::vector<unsigned char> input{
         testing_sb64::decode_to_uchars(std::vector<unsigned char>{'d', '3', 'h', '5'})
@@ -26,7 +26,7 @@ BOOST_AUTO_TEST_CASE(Decodes_whole_b64_word_with_no_padds)
 
 BOOST_AUTO_TEST_CASE(Decodes_b64_word_with_single_padd)
 {
-    const unsigned char padd{sb64::constant::padd_char};
+    const unsigned char padd{sb64::detail::constant::padd_char};
 
     const std::vector<unsigned char> input{
         testing_sb64::decode_to_uchars(std::vector<unsigned char>{'d', '3', 'g', padd})
@@ -44,7 +44,7 @@ BOOST_AUTO_TEST_CASE(Decodes_b64_word_with_single_padd)
 
 BOOST_AUTO_TEST_CASE(Decodes_b64_word_with_two_padds)
 {
-    const unsigned char padd{sb64::constant::padd_char};
+    const unsigned char padd{sb64::detail::constant::padd_char};
 
     const std::vector<unsigned char> input{
         testing_sb64::decode_to_uchars(std::vector<unsigned char>{'d', 'w', padd, padd})
@@ -78,7 +78,7 @@ BOOST_AUTO_TEST_CASE(Empty_output_on_empty_input)
 
 BOOST_AUTO_TEST_CASE(Decodes_single_b64_encoded_null_character)
 {
-    const unsigned char padd{sb64::constant::padd_char};
+    const unsigned char padd{sb64::detail::constant::padd_char};
 
     const std::vector<unsigned char> input{
         testing_sb64::decode_to_uchars(std::vector<unsigned char>{'A', 'A', padd, padd})
@@ -96,7 +96,7 @@ BOOST_AUTO_TEST_CASE(Decodes_single_b64_encoded_null_character)
 
 BOOST_AUTO_TEST_CASE(Decodes_word_composed_of_all_encoded_null_characters)
 {
-    const unsigned char padd{sb64::constant::padd_char};
+    const unsigned char padd{sb64::detail::constant::padd_char};
 
     const std::vector<unsigned char> input{
         testing_sb64::decode_to_uchars(std::vector<unsigned char>{'A', 'A', 'A', 'A'})
@@ -114,7 +114,7 @@ BOOST_AUTO_TEST_CASE(Decodes_word_composed_of_all_encoded_null_characters)
 
 BOOST_AUTO_TEST_CASE(Decodes_word_composed_of_all_encoded_one_bit_characters)
 {
-    const unsigned char padd{sb64::constant::padd_char};
+    const unsigned char padd{sb64::detail::constant::padd_char};
 
     const std::vector<unsigned char> input{
         testing_sb64::decode_to_uchars(std::vector<unsigned char>{'/', '/', '/', '/'})
@@ -132,7 +132,7 @@ BOOST_AUTO_TEST_CASE(Decodes_word_composed_of_all_encoded_one_bit_characters)
 
 BOOST_AUTO_TEST_CASE(Decodes_b64_word_containing_all_one_bits)
 {
-    const unsigned char padd{sb64::constant::padd_char};
+    const unsigned char padd{sb64::detail::constant::padd_char};
 
     const std::vector<unsigned char> input{
         testing_sb64::decode_to_uchars(std::vector<unsigned char>{'/', 'w', padd, padd})
@@ -150,7 +150,7 @@ BOOST_AUTO_TEST_CASE(Decodes_b64_word_containing_all_one_bits)
 
 BOOST_AUTO_TEST_CASE(Decodes_multiple_b64_words)
 {
-    const unsigned char padd{sb64::constant::padd_char};
+    const unsigned char padd{sb64::detail::constant::padd_char};
 
     const std::vector<unsigned char> input{
         testing_sb64::decode_to_uchars(std::vector<unsigned char>{'d', '3', 'h', '5', 'd', '3', 'g', padd})

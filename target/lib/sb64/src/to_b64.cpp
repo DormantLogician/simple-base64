@@ -4,7 +4,7 @@
 #include "sb64/to_b64.h"
 #include "sb64/Letter.h"
 #include "sb64/detail/to_alphabet_char.h"
-#include "sb64/constant/common.h"
+#include "sb64/detail/constant/common.h"
 #include "sb64/detail/utility/write_stream.h"
 
 namespace sb64
@@ -18,7 +18,7 @@ namespace sb64
             // Add zeros to word so we can pad the word later.
             std::vector<Letter> with_padding{word};
             long long padding_amount{0};
-            while (with_padding.size() < constant::encoder_word_size)
+            while (with_padding.size() < detail::constant::encoder_word_size)
             {
                 with_padding.push_back(zero_padd_value);
                 ++padding_amount;
@@ -42,13 +42,13 @@ namespace sb64
 
             for (long long index{0}; index < padding_amount; ++index)
             {
-                encoded.push_back(constant::padd_char);
+                encoded.push_back(detail::constant::padd_char);
             };
 
             writer(encoded);
             return true;
         }};
 
-        detail::utility::write_stream(constant::encoder_word_size, reader, word_encoder);
+        detail::utility::write_stream(detail::constant::encoder_word_size, reader, word_encoder);
     };
 };

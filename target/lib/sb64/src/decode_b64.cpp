@@ -6,7 +6,7 @@
 #include "sb64/Letter.h"
 #include "sb64/detail/utility/iterable_reader.h"
 #include "sb64/is_valid_b64.h"
-#include "sb64/constant/common.h"
+#include "sb64/detail/constant/common.h"
 #include "sb64/detail/to_original_char.h"
 #include "sb64/detail/utility/write_stream.h"
 
@@ -26,7 +26,7 @@ namespace sb64
             std::vector<Letter> by_six_bits{};
             for (auto character{word.cbegin()}; character < word.cend(); ++character)
             {
-                if (*character != constant::padd_char)
+                if (*character != detail::constant::padd_char)
                 {
                     const Letter as_original_char{*detail::to_original_char(*character)};
                     std::vector<bool> as_bits{as_original_char.bits()};
@@ -55,6 +55,6 @@ namespace sb64
             return true;
         }};
 
-        detail::utility::write_stream(constant::decoder_word_size, reader, word_decoder);
+        detail::utility::write_stream(detail::constant::decoder_word_size, reader, word_decoder);
     };
 };

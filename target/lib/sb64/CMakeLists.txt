@@ -11,9 +11,9 @@ add_library(${BINARY_NAME}
     inc/${BINARY_NAME}/detail/to_alphabet_char.h
     inc/${BINARY_NAME}/detail/to_original_char.h
     inc/${BINARY_NAME}/detail/constant/alphabet.h
+    inc/${BINARY_NAME}/detail/constant/common.h
     inc/${BINARY_NAME}/detail/utility/iterable_reader.h
     inc/${BINARY_NAME}/detail/utility/write_stream.h
-    inc/${BINARY_NAME}/constant/common.h
     inc/${BINARY_NAME}/decode_b64.h
     inc/${BINARY_NAME}/is_valid_b64.h
     inc/${BINARY_NAME}/Letter.h
@@ -22,15 +22,19 @@ add_library(${BINARY_NAME}
 
 install(TARGETS ${BINARY_NAME} RUNTIME DESTINATION ${CMAKE_INSTALL_LIBDIR})
 install(FILES
-    inc/${BINARY_NAME}/constant/common.h
-    DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/${BINARY_NAME}/constant
-)
-install(FILES
     inc/${BINARY_NAME}/decode_b64.h
     inc/${BINARY_NAME}/is_valid_b64.h
     inc/${BINARY_NAME}/Letter.h
     inc/${BINARY_NAME}/to_b64.h
     DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/${BINARY_NAME}
+)
+
+install(FILES 
+    doc/man/decode_b64.3.gz
+    doc/man/is_valid_b64.3.gz
+    doc/man/Letter.3.gz
+    doc/man/to_b64.3.gz
+    DESTINATION ${CMAKE_INSTALL_MANDIR}/man3
 )
 
 setupFlags(${BINARY_NAME})

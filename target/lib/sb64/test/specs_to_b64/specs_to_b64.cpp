@@ -1,7 +1,7 @@
 #include <boost/test/unit_test.hpp>
 #include <vector>
 
-#include "sb64/constant/common.h"
+#include "sb64/detail/constant/common.h"
 #include "sb64/to_b64.h"
 #include "specs_to_b64/encode_to_uchars.h"
 
@@ -14,7 +14,7 @@ BOOST_AUTO_TEST_CASE(Empty_output_on_empty_input)
 
 BOOST_AUTO_TEST_CASE(Encodes_single_regular_character_with_two_padds)
 {
-    const unsigned char padd{sb64::constant::padd_char};
+    const unsigned char padd{sb64::detail::constant::padd_char};
 
     const std::vector<unsigned char> output{
         specs_to_b64::encode_to_uchars(std::vector<unsigned char>{'A'})
@@ -32,7 +32,7 @@ BOOST_AUTO_TEST_CASE(Encodes_single_regular_character_with_two_padds)
 
 BOOST_AUTO_TEST_CASE(Encodes_single_regular_character_with_one_padd)
 {
-    const unsigned char padd{sb64::constant::padd_char};
+    const unsigned char padd{sb64::detail::constant::padd_char};
 
     const std::vector<unsigned char> output{
         specs_to_b64::encode_to_uchars(std::vector<unsigned char>{'A', 'A'})
@@ -66,7 +66,7 @@ BOOST_AUTO_TEST_CASE(Encodes_single_regular_character_with_no_padds)
 
 BOOST_AUTO_TEST_CASE(Encodes_single_null_character)
 {
-    const unsigned char padd{sb64::constant::padd_char};
+    const unsigned char padd{sb64::detail::constant::padd_char};
 
     const std::vector<unsigned char> output{
         specs_to_b64::encode_to_uchars(std::vector<unsigned char>{'\0'})
@@ -84,7 +84,7 @@ BOOST_AUTO_TEST_CASE(Encodes_single_null_character)
 
 BOOST_AUTO_TEST_CASE(Encodes_single_all_one_bits_character)
 {
-    const unsigned char padd{sb64::constant::padd_char};
+    const unsigned char padd{sb64::detail::constant::padd_char};
 
     const std::vector<unsigned char> output{
         specs_to_b64::encode_to_uchars(std::vector<unsigned char>{0b11111111})
@@ -134,7 +134,7 @@ BOOST_AUTO_TEST_CASE(Encodes_multiple_all_one_bits_characters)
 
 BOOST_AUTO_TEST_CASE(Encodes_multiple_words)
 {
-    const unsigned char padd{sb64::constant::padd_char};
+    const unsigned char padd{sb64::detail::constant::padd_char};
 
     const std::vector<unsigned char> output{
         specs_to_b64::encode_to_uchars(std::vector<unsigned char>{'w', 'x', 'y', 'w', 'x'})
