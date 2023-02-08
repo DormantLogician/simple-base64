@@ -1,0 +1,2 @@
+### Description
+Software currently has beta status due to a lack of good security auditors. If the software was properly and throughly audited and tested for security-related bugs, it might help it become ready for production in the future.

@@ -1,0 +1,116 @@
+{
+    "version": 2,
+    "cmakeMinimumRequired":
+    {
+        "major": 3,
+        "minor": 20,
+        "patch": 0
+    },
+    "configurePresets":
+    [
+        {
+            "name": "release",
+            "displayName": "Release",
+            "description": "GCC with Ninja generator set to release mode.",
+            "generator": "Ninja",
+            "binaryDir": "${sourceDir}/built",
+            "cacheVariables":
+            {
+                "CMAKE_BUILD_TYPE": "Release",
+                "CMAKE_CXX_COMPILER": "g++"
+            }
+        },
+        {
+            "name": "debug",
+            "inherits": "release",
+            "displayName": "Debug",
+            "description": "GCC with Ninja generator set to debug mode.",
+            "cacheVariables":
+            {
+                "CMAKE_BUILD_TYPE": "Debug",
+                "CMAKE_CXX_COMPILER": "g++"
+            }
+        },
+        {
+            "name": "profile",
+            "inherits": "release",
+            "displayName": "Profile",
+            "description": "GCC with Ninja generator set to profiling mode.",
+            "cacheVariables":
+            {
+                "CMAKE_BUILD_TYPE": "Profile",
+                "CMAKE_CXX_COMPILER": "g++"
+            }
+        },
+        {
+            "name": "test",
+            "inherits": "release",
+            "displayName": "Test",
+            "description": "GCC with Ninja generator set to Test mode (Address sanitizer).",
+            "cacheVariables":
+            {
+                "CMAKE_BUILD_TYPE": "Test",
+                "CMAKE_CXX_COMPILER": "g++"
+            }
+        },
+        {
+            "name": "valgrind",
+            "inherits": "release",
+            "displayName": "Valgrind",
+            "description": "GCC with Ninja generator set to Valgrind mode (for Valgrind-enabled tests).",
+            "cacheVariables":
+            {
+                "CMAKE_BUILD_TYPE": "valgrind",
+                "CMAKE_CXX_COMPILER": "g++"
+            }
+        }
+    ],
+    "buildPresets":
+    [
+        {
+            "name": "release",
+            "configurePreset": "release",
+            "jobs": 4
+        },
+        {
+            "name": "debug",
+            "configurePreset": "debug",
+            "jobs": 4
+        },
+        {
+            "name": "profile",
+            "configurePreset": "profile",
+            "jobs": 4
+        },
+        {
+            "name": "test",
+            "configurePreset": "test",
+            "jobs": 4
+        },
+        {
+            "name": "valgrind",
+            "configurePreset": "valgrind",
+            "jobs": 4
+        }
+    ],
+    "testPresets":
+    [
+        {
+            "name": "test",
+            "configurePreset": "test",
+            "output": {"outputOnFailure": true},
+            "execution": {"noTestsAction": "error", "stopOnFailure": true, "jobs": 4}
+        },
+        {
+            "name": "valgrind",
+            "inherits": "test",
+            "configurePreset": "valgrind",
+            "execution": {"noTestsAction": "error", "stopOnFailure": true, "jobs": 1}
+        },
+        {
+            "name": "release",
+            "inherits": "test",
+            "configurePreset": "release"
+        }
+    ]
+}
