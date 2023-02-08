@@ -22,7 +22,7 @@ function(setupFlags TARGET)
             ${CLANG_VALGRIND_FLAGS}
             ${CLANG_PROFILE_FLAGS}
         )
-        
+
         target_link_options(${TARGET} PRIVATE
             ${CLANG_DEBUG_FLAGS}
             ${CLANG_TEST_FLAGS}
@@ -32,8 +32,6 @@ function(setupFlags TARGET)
     endif()
     if (${CMAKE_CXX_COMPILER_ID} MATCHES "MSVC")
         target_compile_options(${TARGET} PRIVATE
-            /guard:cf 
-            /GS
             ${MSVC_DEBUG_FLAGS}
             ${MSVC_TEST_FLAGS}
             ${MSVC_VALGRIND_FLAGS}
@@ -68,7 +66,8 @@ function(makeTest TEST_NAME TEST_SOURCE)
         add_test(
             NAME ${TEST_NAME}
             COMMAND "$<IF:$<BOOL:$<CONFIG:Valgrind>>,${VALGRIND_EXE},$<TARGET_FILE:${TEST_NAME}>>"
-                    "$<$<CONFIG:Valgrind>:-q>" "$<$<CONFIG:Valgrind>:--error-exitcode=1>"
+                    "$<$<CONFIG:Valgrind>:-q>" 
+                    "$<$<CONFIG:Valgrind>:--error-exitcode=1>"
                     "$<$<CONFIG:Valgrind>:--exit-on-first-error=yes>"
                     "$<$<CONFIG:Valgrind>:--track-origins=yes>"
                     "$<$<CONFIG:Valgrind>:$<TARGET_FILE:${TEST_NAME}>>"
