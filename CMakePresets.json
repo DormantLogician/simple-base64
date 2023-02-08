@@ -32,17 +32,6 @@
             }
         },
         {
-            "name": "profile",
-            "inherits": "release",
-            "displayName": "Profile",
-            "description": "GCC with Ninja generator set to profiling mode.",
-            "cacheVariables":
-            {
-                "CMAKE_BUILD_TYPE": "Profile",
-                "CMAKE_CXX_COMPILER": "g++"
-            }
-        },
-        {
             "name": "test",
             "inherits": "release",
             "displayName": "Test",
@@ -54,13 +43,24 @@
             }
         },
         {
-            "name": "valgrind",
+            "name": "profile",
             "inherits": "release",
-            "displayName": "Valgrind",
-            "description": "GCC with Ninja generator set to Valgrind mode (for Valgrind-enabled tests).",
+            "displayName": "Profile",
+            "description": "GCC with Ninja generator set to profiling mode.",
             "cacheVariables":
             {
-                "CMAKE_BUILD_TYPE": "valgrind",
+                "CMAKE_BUILD_TYPE": "Profile",
+                "CMAKE_CXX_COMPILER": "g++"
+            }
+        },
+        {
+            "name": "coverage",
+            "inherits": "release",
+            "displayName": "Coverage",
+            "description": "GCC with Ninja generator set to code coverage mode.",
+            "cacheVariables":
+            {
+                "CMAKE_BUILD_TYPE": "Coverage",
                 "CMAKE_CXX_COMPILER": "g++"
             }
         }
@@ -78,18 +78,18 @@
             "jobs": 4
         },
         {
-            "name": "profile",
-            "configurePreset": "profile",
-            "jobs": 4
-        },
-        {
             "name": "test",
             "configurePreset": "test",
             "jobs": 4
         },
         {
-            "name": "valgrind",
-            "configurePreset": "valgrind",
+            "name": "profile",
+            "configurePreset": "profile",
+            "jobs": 4
+        },
+        {
+            "name": "coverage",
+            "configurePreset": "coverage",
             "jobs": 4
         }
     ],
@@ -102,15 +102,14 @@
             "execution": {"noTestsAction": "error", "stopOnFailure": true, "jobs": 4}
         },
         {
-            "name": "valgrind",
-            "inherits": "test",
-            "configurePreset": "valgrind",
-            "execution": {"noTestsAction": "error", "stopOnFailure": true, "jobs": 1}
-        },
-        {
             "name": "release",
             "inherits": "test",
             "configurePreset": "release"
+        },
+        {
+            "name": "coverage",
+            "inherits": "test",
+            "configurePreset": "coverage"
         }
     ]
 }

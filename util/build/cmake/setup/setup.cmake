@@ -12,4 +12,4 @@ set(CMAKE_BUILD_PARALLEL_LEVEL 4)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON) # Allow clang-tidy to access compile commands so linting is possible.
 set(CMAKE_MODULE_PATH ${CMAKE_CURRENT_BINARY_DIR}) # Allow CMake to find Conan's packages.
 
-set(CMAKE_CONFIGURATION_TYPES Debug Release RelWithDebInfo MinSizeRel Test Valgrind Profile)
+set(CMAKE_CONFIGURATION_TYPES Debug Release RelWithDebInfo MinSizeRel Test Profile Coverage)
