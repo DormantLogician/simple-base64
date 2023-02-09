@@ -12,8 +12,6 @@ Simple Base 64 library (libsb64, -lsb64).
 class Letter final
 {
     public:
-        static const unsigned char max_size;
-
         static std::vector<unsigned char> as_uchars(
 
             const std::vector<Letter>& input

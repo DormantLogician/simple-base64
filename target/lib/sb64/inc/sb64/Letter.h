@@ -14,6 +14,8 @@ namespace sb64
         private:
             std::vector<bool> stored;
 
+            static const unsigned char max_size;
+
             /*
              * Removes least significate bits so that they are excluded until
              * there is number of bits less than or equal to Letter max size.
@@ -43,8 +45,6 @@ namespace sb64
             static std::vector<bool> concat_bits(const std::vector<Letter>& input);
 
         public:
-            static const unsigned char max_size;
-
             /*
              * Converts list of Letters to list of unsigned characters.
              * 
