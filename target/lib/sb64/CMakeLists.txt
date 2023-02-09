@@ -29,13 +29,5 @@ install(FILES
     DESTINATION ${CMAKE_INSTALL_INCLUDEDIR}/${BINARY_NAME}
 )
 
-install(FILES 
-    doc/man/decode_b64.3.gz
-    doc/man/is_valid_b64.3.gz
-    doc/man/Letter.3.gz
-    doc/man/to_b64.3.gz
-    DESTINATION ${CMAKE_INSTALL_MANDIR}/man3
-)
-
 setupFlags(${BINARY_NAME})
 target_include_directories(${BINARY_NAME} PUBLIC inc)
