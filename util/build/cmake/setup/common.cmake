@@ -1,7 +1,7 @@
 # Add some default compiler and linker flags to 'TARGET' based on chosen compiler and CMake configuration.
 # Use this function on any new app and library targets internal to project.
 function(setupFlags TARGET)
-    set(CLANG_DEBUG_FLAGS $<$<CONFIG:Debug>:-g>)
+    set(CLANG_DEBUG_FLAGS $<$<CONFIG:Debug>:-g -O0>)
     set(CLANG_TEST_FLAGS $<$<CONFIG:Test>:-g -fsanitize=undefined,address,leak -fno-omit-frame-pointer>)
     set(CLANG_PROFILE_FLAGS $<$<CONFIG:Profile>:-pg>)
     set(CLANG_COVERAGE_FLAGS $<$<CONFIG:Coverage>:--coverage -O0>)
