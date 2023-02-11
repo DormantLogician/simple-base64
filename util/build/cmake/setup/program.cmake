@@ -4,7 +4,9 @@ if (NOT CLANG_TIDY_EXE)
         "Clang-tidy executable not found on system - linting will not be available."
     )
 else()
-    if(STRICT_CLANG_TIDY)
+    if (STRICT_CLANG_TIDY)
         set(CMAKE_CXX_CLANG_TIDY ${CLANG_TIDY_EXE} --warnings-as-errors=* -p ${CMAKE_CURRENT_BINARY_DIR}/compile_commands.json)
+    else
+        set(CMAKE_CXX_CLANG_TIDY ${CLANG_TIDY_EXE} -p ${CMAKE_CURRENT_BINARY_DIR}/compile_commands.json)
     endif()
 endif()
