@@ -31,6 +31,7 @@ namespace sb64
              * 
              * @param bit_groups The list of Letters to read.
              * @param group_max_size Number of bits to read by.
+             * @exception std::invalid_argument if group max size is not greater than zero.
              */
             static std::vector<Letter> by_bits(const std::vector<Letter>& bit_groups,
                                                const long long group_max_size);

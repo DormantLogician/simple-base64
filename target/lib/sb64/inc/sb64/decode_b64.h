@@ -14,6 +14,7 @@ namespace sb64
      * are depleted.
      * @param writer Writes decoded data words at a time to some arbitrary
      * location.
+     * @exception std::invalid_argument if any words are not valid base 64 words.
      */
     void decode_b64(const std::function<std::optional<unsigned char>()>& reader,
                     const std::function<void(const std::vector<unsigned char>& output_text)>& writer);
