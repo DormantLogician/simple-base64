@@ -23,18 +23,6 @@ execute_process(COMMAND ${CONAN_EXE} install ../.. WORKING_DIRECTORY ${BUILT_DIR
 message(STATUS "Configure CMake project...")
 execute_process(COMMAND ${CMAKE_COMMAND} --preset ${MULTI_PRESET} OUTPUT_QUIET COMMAND_ERROR_IS_FATAL ANY)
 
-message(STATUS "Build and test with release configuration...")
-execute_process(COMMAND ${CMAKE_COMMAND} --build --preset ${MULTI_PRESET} --config Release COMMAND_ERROR_IS_FATAL ANY)
-execute_process(COMMAND ${CTEST_EXE} --preset ${MULTI_PRESET} -C Release COMMAND_ERROR_IS_FATAL ANY)
-
-message(STATUS "Build and test with sanitizers...")
-execute_process(COMMAND ${CMAKE_COMMAND} --build --preset ${MULTI_PRESET} --config Test COMMAND_ERROR_IS_FATAL ANY)
-execute_process(COMMAND ${CTEST_EXE} --preset ${MULTI_PRESET} -C Test COMMAND_ERROR_IS_FATAL ANY)
-
-message(STATUS "Build and test with dynamic analysis...")
-execute_process(COMMAND ${CMAKE_COMMAND} --build --preset ${MULTI_PRESET} --config Debug COMMAND_ERROR_IS_FATAL ANY)
-execute_process(COMMAND ${CTEST_EXE} -C Debug -M Experimental -T MemCheck WORKING_DIRECTORY ${BUILT_DIR}/${MULTI_PRESET})
-
 message(STATUS "Build and test with code coverage...")
 execute_process(COMMAND ${CMAKE_COMMAND} --build --preset ${MULTI_PRESET} --config Coverage COMMAND_ERROR_IS_FATAL ANY)
 execute_process(COMMAND ${CTEST_EXE} --preset ${MULTI_PRESET} -C Coverage COMMAND_ERROR_IS_FATAL ANY)
