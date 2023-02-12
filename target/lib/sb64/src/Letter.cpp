@@ -26,11 +26,6 @@ namespace sb64
     {
         const long long word_size{(group_max_size > Letter::max_size) ? Letter::max_size : group_max_size};
 
-        if (word_size <= 0)
-        {
-            throw std::invalid_argument{"Max size of string groups must be greater than zero."};
-        };
-
         std::vector<bool> in_bits{Letter::concat_bits(bit_groups)};
 
         std::vector<Letter> in_letters{};

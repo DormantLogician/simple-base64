@@ -14,10 +14,6 @@ namespace sb64
         const std::function padded_correctly{[](const std::vector<unsigned char>& input) -> bool
         {
             const long long min_padd_index{2};
-            if (input.size() == 0)
-            {
-                return true;
-            };
 
             long long padds_found{0};
             for (long long index{0}; index < input.size(); ++index)
