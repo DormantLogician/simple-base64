@@ -1,30 +1,14 @@
 {
-    "version": 2,
-    "cmakeMinimumRequired":
-    {
-        "major": 3,
-        "minor": 20,
-        "patch": 0
-    },
+    "version": 3,
     "configurePresets":
     [
-        {
-            "name": "multi",
-            "displayName": "Multi",
-            "description": "GCC with Ninja Multi-config generator.",
-            "generator": "Ninja Multi-Config",
-            "binaryDir": "${sourceDir}/built/multi",
-            "cacheVariables":
-            {
-                "CMAKE_CXX_COMPILER": "g++"
-            }
-        },
         {
             "name": "release",
             "displayName": "Release",
             "description": "GCC with Ninja generator set to release mode.",
             "generator": "Ninja",
             "binaryDir": "${sourceDir}/built/single",
+            "toolchainFile": "${sourceDir}/built/single/generators/conan_toolchain.cmake",
             "cacheVariables":
             {
                 "CMAKE_BUILD_TYPE": "Release",
@@ -39,6 +23,17 @@
             "cacheVariables":
             {
                 "CMAKE_BUILD_TYPE": "Debug",
+                "CMAKE_CXX_COMPILER": "g++"
+            }
+        },
+        {
+            "name": "test",
+            "inherits": "release",
+            "displayName": "Test",
+            "description": "GCC with Ninja generator set to testing (sanitizer) mode.",
+            "cacheVariables":
+            {
+                "CMAKE_BUILD_TYPE": "Test",
                 "CMAKE_CXX_COMPILER": "g++"
             }
         },
@@ -68,11 +63,6 @@
     "buildPresets":
     [
         {
-            "name": "multi",
-            "configurePreset": "multi",
-            "jobs": 4
-        },
-        {
             "name": "release",
             "configurePreset": "release",
             "jobs": 4
@@ -80,6 +70,11 @@
         {
             "name": "debug",
             "configurePreset": "debug",
+            "jobs": 4
+        },
+        {
+            "name": "test",
+            "configurePreset": "test",
             "jobs": 4
         },
         {
@@ -96,24 +91,24 @@
     "testPresets":
     [
         {
-            "name": "multi",
-            "configurePreset": "multi",
+            "name": "release",
+            "configurePreset": "release",
             "output": {"outputOnFailure": true},
             "execution": {"noTestsAction": "error", "stopOnFailure": true, "jobs": 4}
         },
         {
-            "name": "release",
-            "inherits": "multi",
-            "configurePreset": "release"
-        },
-        {
             "name": "debug",
-            "inherits": "multi",
+            "inherits": "release",
             "configurePreset": "debug"
         },
         {
+            "name": "test",
+            "inherits": "release",
+            "configurePreset": "test"
+        },
+        {
             "name": "coverage",
-            "inherits": "multi",
+            "inherits": "release",
             "configurePreset": "coverage"
         }
     ]

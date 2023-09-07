@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.20)
+cmake_minimum_required(VERSION 3.21)
 
 project(sb64
     LANGUAGES CXX
@@ -17,8 +17,7 @@ include(${SETUP_DIR}/packing.cmake) # Configure CPack so we can package our bina
 # Add project's targets to build.
 set(TARGET_DIR ${CMAKE_CURRENT_SOURCE_DIR}/target)
 
-add_subdirectory(${TARGET_DIR}/lib/sb64)
-addTestDir(${TARGET_DIR}/lib/sb64/test)
+add_subdirectory(${TARGET_DIR}/sb64)
 
 install(FILES LICENSE.txt DESTINATION ${CMAKE_INSTALL_DOCDIR})
 
