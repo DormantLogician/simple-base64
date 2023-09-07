@@ -5,4 +5,3 @@ add_executable(${BINARY_NAME}
 )
 
 setupFlags(${BINARY_NAME})
-target_include_directories(${BINARY_NAME} PRIVATE inc)

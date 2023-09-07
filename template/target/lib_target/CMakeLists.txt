@@ -7,3 +7,5 @@ add_library(${BINARY_NAME}
 setupFlags(${BINARY_NAME})
 target_include_directories(${BINARY_NAME} PUBLIC inc)
 
+# Please fill in (if applicable) test targets as described below.
+# addTestDir(test/all_lib_target_specs)
