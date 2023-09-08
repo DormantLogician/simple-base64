@@ -1,17 +1,23 @@
 find_program(CONAN_EXE NAMES "conan" DOC "Path to Conan package manager tool.")
+find_program(CTEST_EXE NAMES "ctest" DOC "Path to CTest test runner.")
+
 if (NOT CONAN_EXE)
-    message(FATAL_ERROR 
+    message(SEND_ERROR 
         "Conan package manager executable not found on system - this is required to get dependencies for the project."
     )
 endif()
 
-find_program(CTEST_EXE NAMES "ctest" DOC "Path to CTest test runner.")
 if (NOT CTEST_EXE)
-    message(FATAL_ERROR 
+    message(SEND_ERROR 
         "CTest test runner executable not found on system - this is required to run the project's tests."
     )
 endif()
 
+if (NOT CONAN_EXE OR NOT CTEST_EXE)
+    message(FATAL_ERROR 
+        "Not all programs required to run script are available on system - please check which programs are missing above."
+    )
+endif()
 
 set(BUILT_DIR built/single)
 set(DEBUG_PRESET debug)
