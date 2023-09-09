@@ -32,4 +32,8 @@ install(FILES
 setupFlags(${BINARY_NAME})
 target_include_directories(${BINARY_NAME} PUBLIC inc)
 
+set_target_properties(${BINARY_NAME}
+    PROPERTIES SOVERSION ${PROJECT_DEBIAN_SOVERSION}
+)
+
 addTestDir(test)
