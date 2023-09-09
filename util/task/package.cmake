@@ -26,7 +26,7 @@ if (NOT CONAN_EXE OR NOT CTEST_EXE OR NOT CPACK_EXE)
     )
 endif()
 
-set(BUILT_DIR built/single)
+set(BUILT_DIR built/Release)
 set(RELEASE_PRESET release)
 
 message(STATUS "Run Conan...")
