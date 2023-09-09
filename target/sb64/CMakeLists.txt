@@ -20,7 +20,8 @@ add_library(${BINARY_NAME}
     inc/${BINARY_NAME}/to_b64.h
 )
 
-install(TARGETS ${BINARY_NAME} ARCHIVE DESTINATION ${CMAKE_INSTALL_LIBDIR})
+install(TARGETS ${BINARY_NAME} LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR})
+
 install(FILES
     inc/${BINARY_NAME}/decode_b64.h
     inc/${BINARY_NAME}/is_valid_b64.h
@@ -33,7 +34,7 @@ setupFlags(${BINARY_NAME})
 target_include_directories(${BINARY_NAME} PUBLIC inc)
 
 set_target_properties(${BINARY_NAME}
-    PROPERTIES SOVERSION ${PROJECT_DEBIAN_SOVERSION}
+    PROPERTIES SOVERSION ${SB64_DEBIAN_SOVERSION}
 )
 
 addTestDir(test)
