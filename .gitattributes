@@ -1,12 +1,11 @@
-text=auto
+text eol=crlf
 
-target/**/*.h eol=crlf
-target/**/*.cpp eol=crlf
-target/**/*.md eol=crlf
+target/** eol=crlf
 doc/** eol=crlf
 
 *.md eol=crlf
 
 conanfile.py eol=crlf
 LICENSE.txt eol=crlf
+
 
