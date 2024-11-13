@@ -11,7 +11,7 @@ class ConfigConan(ConanFile):
     description = """Simple base 64 encoder/decoder library."""
     upload_policy = "skip"
 
-    requires = "boost/1.83.0"
+    requires = "boost/1.86.0"
     generators = "CMakeDeps"
 
     settings = "os", "compiler", "build_type", "arch"
