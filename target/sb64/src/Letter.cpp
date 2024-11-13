@@ -26,7 +26,7 @@ namespace sb64
     {
         const long long word_size{(group_max_size > Letter::max_size) ? Letter::max_size : group_max_size};
 
-        std::vector<bool> in_bits{Letter::concat_bits(bit_groups)};
+        const std::vector<bool> in_bits{Letter::concat_bits(bit_groups)};
 
         std::vector<Letter> in_letters{};
         const std::function add_letter{[&in_letters](const std::vector<bool>& output) -> bool
