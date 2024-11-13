@@ -31,7 +31,7 @@ set(RELEASE_PRESET release)
 
 message(STATUS "Run Conan...")
 file(MAKE_DIRECTORY ${BUILT_DIR})
-execute_process(COMMAND ${CONAN_EXE} install . --build=missing COMMAND_ERROR_IS_FATAL ANY)
+execute_process(COMMAND ${CONAN_EXE} install . --build=missing -s build_type=Release COMMAND_ERROR_IS_FATAL ANY)
 
 message(STATUS "Configure CMake project...")
 execute_process(COMMAND ${CMAKE_COMMAND} --preset ${RELEASE_PRESET} COMMAND_ERROR_IS_FATAL ANY)
@@ -54,3 +54,5 @@ else()
     execute_process(COMMAND ${CPACK_EXE} WORKING_DIRECTORY ${BUILT_DIR} COMMAND_ERROR_IS_FATAL ANY)
     execute_process(COMMAND ${CPACK_EXE} --config CPackSourceConfig.cmake WORKING_DIRECTORY ${BUILT_DIR} COMMAND_ERROR_IS_FATAL ANY)
 endif()
+
+

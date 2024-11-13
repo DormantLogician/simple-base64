@@ -2,6 +2,7 @@ set(BINARY_NAME sb64)
 set(MODULE_NAME all_${BINARY_NAME}_specs)
 
 makeTest(${MODULE_NAME} ${MODULE_NAME}.cpp)
+setupFlags(${MODULE_NAME})
 
 add_subdirectory(specs_decode_b64)
 add_subdirectory(specs_is_valid_b64)
@@ -32,3 +33,5 @@ target_link_libraries(${MODULE_NAME} PRIVATE ${BINARY_NAME}
     ${BINARY_NAME}_specs_to_original_char
     ${BINARY_NAME}_specs_write_stream
 )
+
+

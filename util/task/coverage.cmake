@@ -19,12 +19,12 @@ if (NOT CONAN_EXE OR NOT CTEST_EXE)
     )
 endif()
 
-set(BUILT_DIR built/Debug)
+set(BUILT_DIR built/Release)
 set(COVERAGE_PRESET coverage)
 
 message(STATUS "Run Conan...")
 file(MAKE_DIRECTORY ${BUILT_DIR})
-execute_process(COMMAND ${CONAN_EXE} install . --build=missing -s build_type=Debug COMMAND_ERROR_IS_FATAL ANY)
+execute_process(COMMAND ${CONAN_EXE} install . --build=missing -s build_type=Release COMMAND_ERROR_IS_FATAL ANY)
 
 message(STATUS "Configure CMake project...")
 execute_process(COMMAND ${CMAKE_COMMAND} --preset ${COVERAGE_PRESET} COMMAND_ERROR_IS_FATAL ANY)
@@ -33,3 +33,5 @@ message(STATUS "Build and test with code coverage...")
 execute_process(COMMAND ${CMAKE_COMMAND} --build --preset ${COVERAGE_PRESET} COMMAND_ERROR_IS_FATAL ANY)
 execute_process(COMMAND ${CTEST_EXE} --preset ${COVERAGE_PRESET} COMMAND_ERROR_IS_FATAL ANY)
 execute_process(COMMAND ${CTEST_EXE} -M Experimental -T Coverage WORKING_DIRECTORY ${BUILT_DIR})
+
+

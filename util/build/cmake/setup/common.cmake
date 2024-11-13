@@ -2,15 +2,20 @@
 # Use this function on any new app and library targets internal to project.
 function(setupFlags TARGET)
     set(CLANG_DEBUG_FLAGS $<$<CONFIG:Debug>:-g -O0>)
-    set(CLANG_TEST_FLAGS $<$<CONFIG:Test>:-g -fsanitize=undefined,address,leak -fno-omit-frame-pointer>)
-    set(CLANG_PROFILE_FLAGS $<$<CONFIG:Profile>:-pg>)
-    set(CLANG_COVERAGE_FLAGS $<$<CONFIG:Coverage>:--coverage -O0>)
+    set(CLANG_TEST_FLAGS $<$<STREQUAL:${BUILD_SUBTYPE_FLAG},Test>:-fsanitize=undefined,address,leak -fno-omit-frame-pointer>)
+    set(CLANG_PROFILE_FLAGS $<$<STREQUAL:${BUILD_SUBTYPE_FLAG},Profile>:-pg>)
+    set(CLANG_COVERAGE_FLAGS $<$<STREQUAL:${BUILD_SUBTYPE_FLAG},Coverage>:--coverage -O0>)
+
+    set(GCC_DEBUG_FLAGS ${CLANG_DEBUG_FLAGS})
+    set(GCC_TEST_FLAGS ${CLANG_TEST_FLAGS})
+    set(GCC_PROFILE_FLAGS ${CLANG_PROFILE_FLAGS})
+    set(GCC_COVERAGE_FLAGS ${CLANG_COVERAGE_FLAGS})
 
     set(MSVC_DEBUG_FLAGS $<$<CONFIG:Debug>:/DEBUG>)
-    set(MSVC_TEST_FLAGS $<$<CONFIG:Test>:/DEBUG /fsanitize=address /Oy->)
-    set(MSVC_PROFILE_FLAGS $<$<CONFIG:Profile>:/GENPROFILE>)
+    set(MSVC_TEST_FLAGS $<$<STREQUAL:${BUILD_SUBTYPE_FLAG},Test>:/DEBUG /fsanitize=address /Oy->)
+    set(MSVC_PROFILE_FLAGS $<$<STREQUAL:${BUILD_SUBTYPE_FLAG},Profile>:/GENPROFILE>)
 
-    if (${CMAKE_CXX_COMPILER_ID} MATCHES "Clang|GNU")
+    if (${CMAKE_CXX_COMPILER_ID} MATCHES "Clang")
         target_compile_options(${TARGET} PRIVATE
             -fno-strict-overflow
             -fno-strict-aliasing
@@ -28,6 +33,26 @@ function(setupFlags TARGET)
             ${CLANG_TEST_FLAGS}
             ${CLANG_PROFILE_FLAGS}
             ${CLANG_COVERAGE_FLAGS}
+        )
+    endif()
+    if (${CMAKE_CXX_COMPILER_ID} MATCHES "GNU")
+        target_compile_options(${TARGET} PRIVATE
+            -fno-strict-overflow
+            -fno-strict-aliasing
+            -fno-delete-null-pointer-checks
+            -Wuninitialized
+            -Winit-self
+            ${GCC_DEBUG_FLAGS}
+            ${GCC_TEST_FLAGS}
+            ${GCC_PROFILE_FLAGS}
+            ${GCC_COVERAGE_FLAGS}
+        )
+
+        target_link_options(${TARGET} PRIVATE
+            ${GCC_DEBUG_FLAGS}
+            ${GCC_TEST_FLAGS}
+            ${GCC_PROFILE_FLAGS}
+            ${GCC_COVERAGE_FLAGS}
         )
     endif()
     if (${CMAKE_CXX_COMPILER_ID} MATCHES "MSVC")
@@ -57,9 +82,6 @@ function(makeTest TEST_NAME TEST_SOURCE)
     if (BUILD_TESTING)
         add_executable(${TEST_NAME} ${TEST_SOURCE})
 
-        target_link_libraries(${TEST_NAME} PRIVATE Boost::unit_test_framework)
-        setupFlags(${TEST_NAME})
-
         add_test(
             NAME ${TEST_NAME}
             COMMAND $<TARGET_FILE:${TEST_NAME}>
@@ -74,3 +96,5 @@ function(findDependency TARG_NAME)
         include_directories(${${TARG_NAME}_INCLUDE_DIRS})
     endif()
 endfunction()
+
+

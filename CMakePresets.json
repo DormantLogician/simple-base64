@@ -57,11 +57,12 @@
             "name": "test",
             "displayName": "Test",
             "description": "Testing (sanitizer) mode preset.",
-            "binaryDir": "${sourceDir}/built/Debug",
-            "toolchainFile": "${sourceDir}/built/Debug/generators/conan_toolchain.cmake",
+            "binaryDir": "${sourceDir}/built/Release",
+            "toolchainFile": "${sourceDir}/built/Release/generators/conan_toolchain.cmake",
             "cacheVariables":
             {
-                "CMAKE_BUILD_TYPE": "Test"
+                "CMAKE_BUILD_TYPE": "Release",
+                "BUILD_SUBTYPE_FLAG": "Test"
             }
         },
         {
@@ -72,18 +73,20 @@
             "toolchainFile": "${sourceDir}/built/Debug/generators/conan_toolchain.cmake",
             "cacheVariables":
             {
-                "CMAKE_BUILD_TYPE": "Profile"
+                "CMAKE_BUILD_TYPE": "Debug",
+                "BUILD_SUBTYPE_FLAG": "Profile"
             }
         },
         {
             "name": "coverage",
             "displayName": "Coverage",
             "description": "Test coverage mode preset.",
-            "binaryDir": "${sourceDir}/built/Debug",
-            "toolchainFile": "${sourceDir}/built/Debug/generators/conan_toolchain.cmake",
+            "binaryDir": "${sourceDir}/built/Release",
+            "toolchainFile": "${sourceDir}/built/Release/generators/conan_toolchain.cmake",
             "cacheVariables":
             {
-                "CMAKE_BUILD_TYPE": "Coverage"
+                "CMAKE_BUILD_TYPE": "Release",
+                "BUILD_SUBTYPE_FLAG": "Coverage"
             }
         }
     ],
@@ -170,3 +173,5 @@
         }
     ]
 }
+
+
