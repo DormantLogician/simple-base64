@@ -3,13 +3,15 @@
 
 #include <vector>
 
+#include "sb64_export.h"
+
 namespace sb64
 {
     /*
      * Primary class that enables bit manipulation for usage with base 64
      * encoders/decoders.
      */
-    class Letter final
+    class sb64_EXPORT Letter final
     {
         private:
             std::vector<bool> stored;
@@ -34,7 +36,7 @@ namespace sb64
              * @exception std::invalid_argument if group max size is not greater than zero.
              */
             static std::vector<Letter> by_bits(const std::vector<Letter>& bit_groups,
-                                               const long long group_max_size);
+                                                           const long long group_max_size);
 
 
             /*

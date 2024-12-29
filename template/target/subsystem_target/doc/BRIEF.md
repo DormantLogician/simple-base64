@@ -1,2 +1,0 @@
-# SUBSYSTEM_NAME
-### Description

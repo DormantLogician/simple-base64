@@ -26,19 +26,18 @@ if (NOT CONAN_EXE OR NOT CTEST_EXE OR NOT CPACK_EXE)
     )
 endif()
 
-set(BUILT_DIR built/Release)
-set(RELEASE_PRESET release)
+set(BUILT_DIR built)
 
 message(STATUS "Run Conan...")
 file(MAKE_DIRECTORY ${BUILT_DIR})
 execute_process(COMMAND ${CONAN_EXE} install . --build=missing -s build_type=Release COMMAND_ERROR_IS_FATAL ANY)
 
 message(STATUS "Configure CMake project...")
-execute_process(COMMAND ${CMAKE_COMMAND} --preset ${RELEASE_PRESET} COMMAND_ERROR_IS_FATAL ANY)
+execute_process(COMMAND ${CMAKE_COMMAND} --preset conan-default COMMAND_ERROR_IS_FATAL ANY)
 
 message(STATUS "Build and test in release mode...")
-execute_process(COMMAND ${CMAKE_COMMAND} --build --preset ${RELEASE_PRESET} COMMAND_ERROR_IS_FATAL ANY)
-execute_process(COMMAND ${CTEST_EXE} --preset ${RELEASE_PRESET} COMMAND_ERROR_IS_FATAL ANY)
+execute_process(COMMAND ${CMAKE_COMMAND} --build --preset conan-release --config Release COMMAND_ERROR_IS_FATAL ANY)
+execute_process(COMMAND ${CTEST_EXE} --preset conan-release -C Release COMMAND_ERROR_IS_FATAL ANY)
 
 message(STATUS "Package project...")
 if (CMAKE_HOST_SYSTEM_NAME STREQUAL "Linux")

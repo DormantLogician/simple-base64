@@ -4,6 +4,8 @@
 #include <functional>
 #include <optional>
 
+#include "sb64_export.h"
+
 namespace sb64
 {
     /*
@@ -12,7 +14,7 @@ namespace sb64
      * @param reader Yields characters from some arbitrary location until they
      * are depleted.
      */
-    bool is_valid_b64(const std::function<std::optional<unsigned char>()>& reader);
+    sb64_EXPORT bool is_valid_b64(const std::function<std::optional<unsigned char>()>& reader);
 };
 
 #endif

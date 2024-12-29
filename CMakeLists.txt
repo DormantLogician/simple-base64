@@ -1,5 +1,7 @@
 cmake_minimum_required(VERSION 3.21)
 
+set(CMAKE_CONFIGURATION_TYPES Debug Release RelWithDebInfo MinSizeRel Test Profile Coverage)
+
 project(sb64
     LANGUAGES CXX
     DESCRIPTION "Simple base 64 encoder/decoder library."

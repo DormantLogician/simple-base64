@@ -1,15 +1,19 @@
 cmake_minimum_required(VERSION 3.21)
 
-project(SB64ConanPackageTest LANGUAGES CXX)
+project(ConanPackageTest LANGUAGES CXX)
 
-set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD 23)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
-set(BINARY_NAME sb64_conan_package_test)
+find_package(sb64 CONFIG REQUIRED)
+
+get_property(SB64_DLL TARGET sb64::sb64 PROPERTY IMPORTED_LOCATION_RELEASE)
+file(COPY ${SB64_DLL} DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
+
+set(BINARY_NAME conan_package_test)
 
 add_executable(${BINARY_NAME}
     ${BINARY_NAME}.cpp
 )
 
-find_package(sb64 REQUIRED)
 target_link_libraries(${BINARY_NAME} PRIVATE sb64::sb64)

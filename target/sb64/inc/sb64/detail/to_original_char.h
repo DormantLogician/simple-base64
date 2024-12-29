@@ -2,6 +2,7 @@
 #define SB64_F_TO_ORIGINAL_CHAR_H
 
 #include <optional>
+#include "sb64_export.h"
 
 namespace sb64::detail
 {
@@ -12,7 +13,7 @@ namespace sb64::detail
      * 
      * @param character Character we must find index of in alphabet.
      */
-    std::optional<unsigned char> to_original_char(const unsigned long long character);
+    sb64_EXPORT std::optional<unsigned char> to_original_char(const unsigned long long character);
 };
 
 #endif

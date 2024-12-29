@@ -5,6 +5,8 @@
 #include <optional>
 #include <functional>
 
+#include "sb64_export.h"
+
 namespace sb64
 {
     /*
@@ -15,8 +17,8 @@ namespace sb64
      * @param writer Writes encoded data words at a time to some arbitrary
      * location.
      */
-      void to_b64(const std::function<std::optional<unsigned char>()>& reader,
-                  const std::function<void(const std::vector<unsigned char>& output_word)>& writer);
+      sb64_EXPORT void to_b64(const std::function<std::optional<unsigned char>()>& reader,
+                              const std::function<void(const std::vector<unsigned char>& output_word)>& writer);
 };
 
 #endif

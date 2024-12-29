@@ -2,6 +2,7 @@
 #define SB64_F_ITERABLE_READER_H
 
 #include <optional>
+#include "sb64_export.h"
 
 namespace sb64::detail::utility
 {

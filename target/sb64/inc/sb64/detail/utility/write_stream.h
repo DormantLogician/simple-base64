@@ -6,6 +6,8 @@
 #include <optional>
 #include <stdexcept>
 
+#include "sb64_export.h"
+
 namespace sb64::detail::utility
 {
     /*

@@ -1,0 +1,5 @@
+#include "${BINARY_NAME}_def_exports.h"
+
+#ifndef _WIN32
+#define ${BINARY_NAME}_EXPORT
+#endif

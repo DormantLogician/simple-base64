@@ -1,5 +1,6 @@
 include(GNUInstallDirs) # Define common file installation paths.
 
+set(CPACK_COMPONENTS_ALL app)
 set(CPACK_PACKAGE_CHECKSUM SHA256)
 set(CPACK_STRIP_FILES YES) # Strip debug symbols from binary files.
 set(CPACK_RESOURCE_FILE_LICENSE ${CMAKE_CURRENT_SOURCE_DIR}/LICENSE.txt)
@@ -8,7 +9,7 @@ set(CPACK_THREADS 2)
 
 set(SB64_DEBIAN_SOVERSION 1)
 set(CPACK_PACKAGE_NAME libsb64-1)
-set(CPACK_PACKAGE_FILE_NAME ${CPACK_PACKAGE_NAME}-${CPACK_SYSTEM_NAME})
+set(CPACK_PACKAGE_FILE_NAME ${CPACK_PACKAGE_NAME})
 set(CPACK_PACKAGE_CONTACT "Stephen Aaron Hannon <hannonstephen19@gmail.com>")
 
 set(CPACK_INSTALL_DEFAULT_DIRECTORY_PERMISSIONS # Make sure directory permissions are set properly.
@@ -23,6 +24,5 @@ set(CPACK_SOURCE_IGNORE_FILES /built;/test_package/build;/.git;/.vscode;/CMakeUs
 set(CPACK_DEBIAN_PACKAGE_SECTION libdevel)
 set(CPACK_DEBIAN_PACKAGE_NAME ${CPACK_PACKAGE_FILE_NAME})
 
-# Make better dependency list in deb file.
-set(CPACK_DEBIAN_PACKAGE_SHLIBDEPS ON)
+set(CPACK_DEBIAN_PACKAGE_SHLIBDEPS ON) # Make better dependency list in deb file.
 set(CPACK_DEBIAN_PACKAGE_GENERATE_SHLIBS ON)

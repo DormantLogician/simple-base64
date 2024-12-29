@@ -2,6 +2,7 @@
 #define SB64_F_TO_ALPHABET_CHAR_H
 
 #include <optional>
+#include "sb64_export.h"
 
 namespace sb64::detail 
 {
@@ -11,7 +12,7 @@ namespace sb64::detail
      * 
      * @param index Character to map to alphabet.
      */
-    std::optional<unsigned char> to_alphabet_char(const long long index);
+    sb64_EXPORT std::optional<unsigned char> to_alphabet_char(const long long index);
 };
 
 #endif
