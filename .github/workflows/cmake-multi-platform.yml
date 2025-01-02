@@ -60,11 +60,13 @@ jobs:
 
     - name: Enter virtual environment
       run: if ["$RUNNER_OS" == "Windows"]; then
-        virtualenv/Scripts/activate else source virtualenv/bin/activate fi
+          virtualenv/Scripts/activate
+      else
+          source virtualenv/bin/activate
+      fi
 
     - name: Install Conan
-      run: if ["$RUNNER_OS" == "Windows"]; then
-        pip3 install conan else pip3 install conan fi
+      run: pip3 install conan
 
     - name: Configure Conan
       run: conan profile detect && conan install . --build=missing
