@@ -67,7 +67,12 @@ jobs:
         fi
 
     - name: Configure Conan
-      run: conan profile detect && conan install . --build=missing
+      run: |
+        if [ "$RUNNER_OS" == "Windows" ]; then
+          virtualenv/Scripts/activate && conan profile detect && conan install . --build=missing
+        else
+          source virtualenv/bin/activate && conan profile detect && conan install . --build=missing
+        fi
       
     - name: Configure CMake
       run: cmake --preset conan-default
