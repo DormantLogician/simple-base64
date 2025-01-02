@@ -71,9 +71,9 @@ jobs:
       shell: bash
       run: |
         if [ "$RUNNER_OS" == "Windows" ]; then
-          virtualenv/Scripts/activate && cmake -P ${{ github.workspace }}/util/task/package.cmake
+          virtualenv/Scripts/activate && cmake -P util/task/package.cmake
         else
-          source virtualenv/bin/activate && cmake -P ${{ github.workspace }}/util/task/package.cmake
+          source virtualenv/bin/activate && cmake -P util/task/package.cmake
         fi
       
     - name: Install project
