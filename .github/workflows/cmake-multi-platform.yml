@@ -58,16 +58,13 @@ jobs:
     - name: Setup virtual environment
       run: python3 -m venv virtualenv
 
-    - name: Enter virtual environment (Other operating systems)
+    - name: Install Conan
       run: |
         if [ "$RUNNER_OS" == "Windows" ]; then
           virtualenv/Scripts/activate && pip3 install conan
         else
           source virtualenv/bin/activate && pip3 install conan
         fi
-
-    - name: Install Conan
-      run: pip3 install conan
 
     - name: Configure Conan
       run: conan profile detect && conan install . --build=missing
