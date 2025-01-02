@@ -58,10 +58,13 @@ jobs:
     - name: Setup virtual environment
       run: python3 -m venv virtualenv
 
-    - name: Enter virtual environment
-      run: if ["$RUNNER_OS" == "Windows"]; then
+    - name: Enter virtual environment (Windows)
+      run: if [ "$RUNNER_OS" == "Windows" ]; then
           virtualenv/Scripts/activate
-      else
+      fi
+
+    - name: Enter virtual environment (Other operating systems)
+      run: if [ "$RUNNER_OS" != "Windows" ]; then
           source virtualenv/bin/activate
       fi
 
