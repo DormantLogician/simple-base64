@@ -55,8 +55,14 @@ jobs:
     steps:
     - uses: actions/checkout@v4
 
+    - name: Setup virtual environment
+      run: python3 -m venv virtualenv
+
     - name: Install Conan
-      run: pip3 install conan
+      run: if ["$RUNNER_OS" == "Windows"]; then
+        virtualenv/Scripts/activate && pip3 install conan
+      else
+        source virtualenv/bin/activate && pip3 install conan
 
     - name: Configure Conan
       run: conan profile detect && conan install . --build=missing
