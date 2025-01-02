@@ -67,6 +67,12 @@ jobs:
           source virtualenv/bin/activate && pip3 install conan && conan profile detect
         fi
 
+    - name: Install NSIS
+      run: |
+        if [ "$RUNNER_OS" == "Windows" ]; then
+          choco install nsis
+        fi
+
     - name: Build project
       shell: bash
       run: |
@@ -77,5 +83,5 @@ jobs:
         fi
       
     - name: Install project
-      run: cmake --install {{ github.workspace }}/built --config Release
+      run: cmake --install built --config Release
 
