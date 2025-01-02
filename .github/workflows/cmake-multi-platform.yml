@@ -81,6 +81,6 @@ jobs:
         if [ "$RUNNER_OS" == "Windows" ]; then
           virtualenv/Scripts/activate && cmake -D GENERATOR_IS_MULTI_CONFIG=ON -P util/task/package.cmake
         else
-          source virtualenv/bin/activate && cmake -D GENERATOR_IS_MULTI_CONFIG=ON -P util/task/package.cmake
+          source virtualenv/bin/activate && cmake -D GENERATOR_IS_MULTI_CONFIG=OFF -P util/task/package.cmake
         fi
 
