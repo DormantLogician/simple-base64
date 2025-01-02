@@ -1,6 +1,5 @@
 include(GNUInstallDirs) # Define common file installation paths.
 
-set(CPACK_COMPONENTS_ALL app)
 set(CPACK_PACKAGE_CHECKSUM SHA256)
 set(CPACK_STRIP_FILES YES) # Strip debug symbols from binary files.
 set(CPACK_RESOURCE_FILE_LICENSE ${CMAKE_CURRENT_SOURCE_DIR}/LICENSE.txt)

@@ -45,7 +45,7 @@ export(TARGETS ${BINARY_NAME}
 )
 
 install(EXPORT ${BINARY_NAME}Config
-    DESTINATION "${CMAKE_INSTALL_PREFIX}/pkg/cmake"
+    DESTINATION "pkg/cmake"
     NAMESPACE ${BINARY_NAME}::
 )
 
