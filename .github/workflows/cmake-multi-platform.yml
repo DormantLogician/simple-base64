@@ -62,9 +62,9 @@ jobs:
       shell: bash
       run: |
         if [ "$RUNNER_OS" == "Windows" ]; then
-          virtualenv/Scripts/activate && pip3 install conan
+          virtualenv/Scripts/activate && pip3 install conan && conan profile detect
         else
-          source virtualenv/bin/activate && pip3 install conan
+          source virtualenv/bin/activate && pip3 install conan && conan profile detect
         fi
 
     - name: Build project
