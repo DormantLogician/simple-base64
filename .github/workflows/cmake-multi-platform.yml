@@ -89,7 +89,11 @@ jobs:
             source virtualenv/bin/activate && conan config install util/ci/conan/ubuntu-latest-clang-settings.yml && conan install . --build=missing
           fi
         else
-          source virtualenv/bin/activate && conan config install util/ci/conan/macos-latest-settings.yml && conan install . --build=missing
+          if [ ${{ matrix.c_compiler }} == "gcc" ]; then
+            source virtualenv/bin/activate && conan config install util/ci/conan/macos-latest-gcc-settings.yml && conan install . --build=missing
+          else
+            source virtualenv/bin/activate && conan config install util/ci/conan/macos-latest-clang-settings.yml && conan install . --build=missing
+          fi
         fi
 
     - name: Configure CMake

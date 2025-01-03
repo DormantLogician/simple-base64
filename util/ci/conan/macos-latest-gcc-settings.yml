@@ -1,0 +1,8 @@
+os: Macos
+arch: armv8
+compiler:
+    gcc:
+        version: 13
+        libcxx: libstdc++11
+        cppstd: 17
+build_type: Release
