@@ -4,5 +4,5 @@ build_type=Release
 compiler=clang
 compiler.cppstd=17
 compiler.version=14
-compiler.libcxx=libc++
+compiler.libcxx=libstdc++
 os=Macos
