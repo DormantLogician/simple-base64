@@ -28,6 +28,7 @@ jobs:
         os: [ubuntu-latest, windows-latest, macos-latest]
         build_type: [Release]
         c_compiler: [gcc, clang, cl]
+        cpp_compiler: [g++, clang++, cl]
         include:
           - os: windows-latest
             c_compiler: cl
@@ -75,12 +76,56 @@ jobs:
           choco install nsis
         fi
 
+    - name: Configure Conan
+      shell: bash
+      run: |
+        if [ "$RUNNER_OS" == "Windows" ]; then
+          virtualenv/Scripts/activate && conan install . --build=missing -s build_type=Release
+        elif [ "$RUNNER_OS" == "Linux" ]; then
+          if [ ${{ matrix.cpp_compiler }} == "g++" ]; then
+            source virtualenv/bin/activate && conan install . --build=missing -s build_type=Release -s compiler=gcc
+          elif [ ${{ matrix.cpp_compiler }} == "clang++" ]; then
+            source virtualenv/bin/activate && conan install . --build=missing -s build_type=Release -s compiler=clang
+          fi
+        elif [ "$RUNNER_OS" == "macOS" ]; then
+          source virtualenv/bin/activate && conan install . --build=missing -s build_type=Release
+        fi
+
+    - name: Configure CMake
+      shell: bash
+      run: |
+        if [ "$RUNNER_OS" == "Windows" ]; then
+          virtualenv/Scripts/activate && cmake --preset conan-default
+        else
+          source virtualenv/bin/activate && cmake --preset conan-release
+        fi
+
     - name: Build project
       shell: bash
       run: |
         if [ "$RUNNER_OS" == "Windows" ]; then
-          virtualenv/Scripts/activate && cmake -D GENERATOR_IS_MULTI_CONFIG=ON -P util/task/package.cmake
+          virtualenv/Scripts/activate && cmake --build --preset conan-release --config Release
         else
-          source virtualenv/bin/activate && cmake -D GENERATOR_IS_MULTI_CONFIG=OFF -P util/task/package.cmake
+          source virtualenv/bin/activate && cmake --build --preset conan-release --config Release
+        fi
+
+    - name: Test project
+      shell: bash
+      run: |
+        if [ "$RUNNER_OS" == "Windows" ]; then
+          virtualenv/Scripts/activate && ctest --preset conan-release -C Release
+        else
+          source virtualenv/bin/activate && ctest --preset conan-release -C Release
+        fi
+
+    - name: Package project
+      shell: bash
+      run: |
+        if [ "$RUNNER_OS" == "Windows" ]; then
+          virtualenv/Scripts/activate && cpack -G "NSIS" --config built/Release/CPackConfig.cmake && cpack -G "ZIP" --config built/Release/CPackSourceConfig.cmake
+        elif [ "$RUNNER_OS" == "Linux"]; then
+          source virtualenv/bin/activate && cpack -G "DEB" --config built/Release/CPackConfig.cmake && cpack -G "ZIP" --config built/Release/CPackSourceConfig.cmake
+        elif [ "$RUNNER_OS" == "macOS"]; then
+          source virtualenv/bin/activate && cpack -G "DragNDrop" --config built/Release/CPackConfig.cmake && cpack -G "ZIP" --config built/Release/CPackSourceConfig.cmake
         fi
 
