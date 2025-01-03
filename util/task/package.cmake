@@ -1,12 +1,5 @@
-find_program(CONAN_EXE NAMES "conan" DOC "Path to Conan package manager tool.")
 find_program(CTEST_EXE NAMES "ctest" DOC "Path to CTest test runner.")
 find_program(CPACK_EXE NAMES "cpack" DOC "Path to CPack packaging tool.")
-
-if (NOT CONAN_EXE)
-    message(SEND_ERROR
-        "Conan package manager executable not found on system - this is required to get dependencies for the project."
-    )
-endif()
 
 if (NOT CTEST_EXE)
     message(SEND_ERROR
@@ -20,24 +13,13 @@ if (NOT CPACK_EXE)
     )
 endif()
 
-if (NOT CONAN_EXE OR NOT CTEST_EXE OR NOT CPACK_EXE)
+if (NOT CTEST_EXE OR NOT CPACK_EXE)
     message(FATAL_ERROR
         "Not all programs required to run script are available on system - please check which programs are missing above."
     )
 endif()
 
 set(BUILT_DIR built)
-
-message(STATUS "Run Conan...")
-file(MAKE_DIRECTORY ${BUILT_DIR})
-execute_process(COMMAND ${CONAN_EXE} install . --build=missing -s build_type=Release COMMAND_ERROR_IS_FATAL ANY)
-
-message(STATUS "Configure CMake project...")
-if (GENERATOR_IS_MULTI_CONFIG)
-    execute_process(COMMAND ${CMAKE_COMMAND} --preset conan-default COMMAND_ERROR_IS_FATAL ANY)
-else()
-    execute_process(COMMAND ${CMAKE_COMMAND} --preset conan-release COMMAND_ERROR_IS_FATAL ANY)
-endif()
 
 message(STATUS "Build and test in release mode...")
 execute_process(COMMAND ${CMAKE_COMMAND} --build --preset conan-release --config Release COMMAND_ERROR_IS_FATAL ANY)
