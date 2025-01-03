@@ -1,0 +1,8 @@
+os: Macos
+arch: armv8
+compiler:
+    apple-clang:
+        version: 15
+        libcxx: libc++
+        cppstd: 17
+build_type: Release

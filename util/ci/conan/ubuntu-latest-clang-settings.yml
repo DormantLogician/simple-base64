@@ -1,0 +1,8 @@
+os: Linux
+arch: x86_64
+compiler:
+    clang:
+        version: 14
+        libcxx: libstdc++11
+        cppstd: 17
+build_type: Release
