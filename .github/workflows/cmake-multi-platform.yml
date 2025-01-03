@@ -81,18 +81,18 @@ jobs:
       shell: bash
       run: |
         if [ "$RUNNER_OS" == "Windows" ]; then
-          virtualenv/Scripts/activate && conan config install util/ci/conan/windows-latest-settings.yml && conan install . --build=missing
+          virtualenv/Scripts/activate && conan config install util/ci/conan/windows-latest && conan install . --build=missing
         elif [ "$RUNNER_OS" == "Linux" ]; then
           if [ ${{ matrix.c_compiler }} == "gcc" ]; then
-            source virtualenv/bin/activate && conan config install util/ci/conan/ubuntu-latest-gcc-settings.yml && conan install . --build=missing
+            source virtualenv/bin/activate && conan config install util/ci/conan/ubuntu-latest-gcc && conan install . --build=missing
           else
-            source virtualenv/bin/activate && conan config install util/ci/conan/ubuntu-latest-clang-settings.yml && conan install . --build=missing
+            source virtualenv/bin/activate && conan config install util/ci/conan/ubuntu-latest-clang && conan install . --build=missing
           fi
         else
           if [ ${{ matrix.c_compiler }} == "gcc" ]; then
-            source virtualenv/bin/activate && conan config install util/ci/conan/macos-latest-gcc-settings.yml && conan install . --build=missing
+            source virtualenv/bin/activate && conan config install util/ci/conan/macos-latest-gcc && conan install . --build=missing
           else
-            source virtualenv/bin/activate && conan config install util/ci/conan/macos-latest-clang-settings.yml && conan install . --build=missing
+            source virtualenv/bin/activate && conan config install util/ci/conan/macos-latest-clang && conan install . --build=missing
           fi
         fi
 
