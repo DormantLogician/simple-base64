@@ -80,8 +80,9 @@ class ConfigConan(ConanFile):
         self.folders.generators = os.path.join(self.folders.build, "generators")
 
     def build(self):
-        self.run("cmake --preset conan-default -D BUILD_TESTING=OFF", cwd=self.source_folder)
-        self.run("cmake --build --preset conan-release --config Release", cwd=self.source_folder)
+        cmake = CMake(self)
+        cmake.configure()
+        cmake.build()
 
     def package(self):
         cmake = CMake(self)
